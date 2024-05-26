@@ -36,14 +36,20 @@ namespace ServiceManager
         //    [schSCManager]() { return std::make_unique<Services::AvastWscReporter>(cexprAvastWscReporter, schSCManager); });
 #pragma endregion AVAST_SVCs
 
-#pragma region GOOGLE
+#pragma region GOOGLE_SVCs
         ServiceTable::Instance().RegisterService(
             GOOGLE_UPDATER_INTERNAL_SVC,
             [schSCManager]() { return std::make_unique<Services::GoogleUpdaterInternalService>(cexprGoogleUpdaterInternalService, schSCManager); });
         ServiceTable::Instance().RegisterService(
             GOOGLE_UPDATER_SVC,
             [schSCManager]() { return std::make_unique<Services::GoogleUpdaterService>(cexprGoogleUpdaterService, schSCManager); });
-#pragma endregion GOOGLE
+#pragma endregion GOOGLE_SVCs
+
+#pragma region MOZILLA_SVCs
+        ServiceTable::Instance().RegisterService(
+            MOZILLA_MAINTENANCE_SVC,
+            [schSCManager]() { return std::make_unique<Services::MozillaMaintenance>(cexprMozillaMaintenance, schSCManager); });
+#pragma endregion MOZILLA_SVCs
 
     }
 }

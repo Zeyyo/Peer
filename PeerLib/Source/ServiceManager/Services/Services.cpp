@@ -145,4 +145,21 @@ namespace ServiceManager::Services
 	}
 #pragma endregion GOOGLE
 
+#pragma region MOZILLA
+	MozillaMaintenance::MozillaMaintenance(std::string szServiceName, SC_HANDLE hSCManager)
+	{
+		szServiceName_ = szServiceName;
+		try
+		{
+			hSCManager_ = hSCManager;
+			hService_ = FetchServiceHandle(hSCManager);
+		}
+		catch (const Exceptions::ServiceManagerExceptions::ServiceHandleException& e)
+		{
+			std::string szErrorMessage = e.GetError();
+			std::cerr << szErrorMessage;
+		}
+	}
+#pragma endregion MOZILLA
+
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #pragma region AVAST_SVCs
-
 #define AVAST_AV 0x1
 #define AVAST_ANTI_TRACK_SVC 0x2
 #define AVAST_CLEANUP_SVC 0x3
@@ -17,15 +16,18 @@ constexpr char cexprAvastDriverUpdSvc[] = "DriverUpdSvc";
 constexpr char cexprAvastFirewall[] = "avast! Firewall";
 constexpr char cexprAvastTools[] = "avast! Tools";
 constexpr char cexprAvastWscReporter[] = "AvastWscReporter";
-
 #pragma endregion AVAST_SVCs
 
 #pragma region GOOGLE_SVCs
-
 #define GOOGLE_UPDATER_INTERNAL_SVC 0x8
 #define GOOGLE_UPDATER_SVC 0x9
 
 constexpr char cexprGoogleUpdaterInternalService[] = "GoogleUpdaterInternalService127.0.6490.0";
 constexpr char cexprGoogleUpdaterService[] = "GoogleUpdaterService127.0.6490.0";
-
 #pragma endregion GOOGLE_SVCs
+
+#pragma region MOZILLA_SVCs
+#define MOZILLA_MAINTENANCE_SVC 0x10
+
+constexpr char cexprMozillaMaintenance[] = "MozillaMaintenance";
+#pragma endregion MOZILLA_SVCs

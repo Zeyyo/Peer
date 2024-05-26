@@ -47,7 +47,6 @@ namespace ServiceManager::Services
 #pragma endregion AVAST_AV
 
 #pragma region GOOGLE
-
 	class GoogleUpdaterInternalService : public IService
 	{
 	public:
@@ -59,7 +58,14 @@ namespace ServiceManager::Services
 	public:
 		GoogleUpdaterService(std::string szServiceName, SC_HANDLE hSCManager);
 	};
-
 #pragma endregion GOOGLE
+
+#pragma region MOZILLA
+	class MozillaMaintenance : public IService
+	{
+	public:
+		MozillaMaintenance(std::string szServiceName, SC_HANDLE hSCManager);
+	};
+#pragma endregion MOZILLA
 
 }
