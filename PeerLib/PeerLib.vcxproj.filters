@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{49cd8bc0-b92b-4d04-892b-0e4c4e6dab60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{978612fc-9f9c-42ea-98e0-97c81b48e3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{41f2fc2e-b513-42a6-955e-10899a0486a5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entry\Initialize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PEer_pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ServiceManager\IService.h" />
+    <ClInclude Include="Source\ServiceManager\ServiceTable.h" />
+    <ClInclude Include="Source\ServiceManager\Services\Services.h" />
+    <ClInclude Include="Source\ServiceManager\config.h" />
+    <ClInclude Include="Source\Events\Exceptions\ServiceManagerExceptions.h" />
+    <ClInclude Include="Source\Utilities\Service\GetWaitTime.h" />
+    <ClInclude Include="Source\Utilities\Service\OpenSCManager.h" />
+    <ClInclude Include="Source\RuntimeSafety\RuntimeSafety.h" />
+    <ClInclude Include="Source\RuntimeSafety\config.h" />
+    <ClInclude Include="Source\Entry\InitializeThreads.h" />
+    <ClInclude Include="Source\Entry\config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\PEer_pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entry\Initialize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ServiceManager\IService.cpp" />
+    <ClCompile Include="Source\ServiceManager\ServiceTable.cpp" />
+    <ClCompile Include="Source\ServiceManager\Services\Services.cpp" />
+    <ClCompile Include="Source\Utilities\Service\GetWaitTime.cpp" />
+    <ClCompile Include="Source\Utilities\Service\OpenSCManager.cpp" />
+    <ClCompile Include="Source\RuntimeSafety\RuntimeSafety.cpp" />
+    <ClCompile Include="Source\Entry\InitializeThreads.cpp" />
+  </ItemGroup>
+</Project>
