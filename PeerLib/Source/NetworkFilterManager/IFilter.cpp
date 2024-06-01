@@ -5,21 +5,16 @@
 #pragma comment(lib, "ws2_32.lib")
 
 #include "Events/Exceptions/NetworkFilterManagerExceptions.h"
+#include "Utilities/Filters/WFP.h"
 #include "IFilter.h"
 
 namespace NetworkFilterManager
 {
-    template<typename T>
-    void AddNetwFilter(T UID, HANDLE hEngine, FWPM_FILTER0& filter)
-    {
-        DWORD result = FwpmFilterAdd0(hEngine, &filter, NULL, NULL);
-        if (result != ERROR_SUCCESS) {
-            throw Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException(UID);
-        }
-    }
-
 	void IPortFilter::AddFilter()
 	{
+        bool bFilterExists = Utilities::Filters::FilterExists(hEngine_, FILTER_KEY_, filter_);
+        if (bFilterExists) { return; }
+
         filter_.filterKey = FILTER_KEY_;
         filter_.layerKey = FWPM_LAYER_OUTBOUND_TRANSPORT_V4;
         filter_.displayData.name = (wchar_t*)L"WinNEtw-PortFilter";
@@ -36,7 +31,7 @@ namespace NetworkFilterManager
 
         try
         {
-            AddNetwFilter(port_, hEngine_, filter_);
+            Utilities::Filters::AddNetwFilter(port_, hEngine_, filter_);
         }
         catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
         {
@@ -54,6 +49,9 @@ namespace NetworkFilterManager
 
     void IAddressFilter::AddFilter()
     {
+        bool bFilterExists = Utilities::Filters::FilterExists(hEngine_, FILTER_KEY_, filter_);
+        if (bFilterExists) { return; }
+
         filter_.layerKey = FWPM_LAYER_OUTBOUND_TRANSPORT_V4;
         filter_.filterKey = FILTER_KEY_;
         filter_.displayData.name = (wchar_t*)L"WinNEtw-AddressFilter";
@@ -74,7 +72,7 @@ namespace NetworkFilterManager
 
         try
         {
-            AddNetwFilter(szAddress_, hEngine_, filter_);
+            Utilities::Filters::AddNetwFilter(szAddress_, hEngine_, filter_);
         }
         catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
         {
