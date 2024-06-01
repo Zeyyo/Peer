@@ -11,7 +11,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     {
     case DLL_PROCESS_ATTACH:
     {
-        Entry::InitializeRuntimeThreads();
+        //Entry::InitializeRuntimeThreads();
         //MessageBox(0, L"Test", L"From unmanaged dll", 0);
     }
     case DLL_THREAD_ATTACH:

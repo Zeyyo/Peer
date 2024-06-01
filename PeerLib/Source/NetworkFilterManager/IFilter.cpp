@@ -9,6 +9,15 @@
 
 namespace NetworkFilterManager
 {
+    template<typename T>
+    void AddNetwFilter(T UID, HANDLE hEngine, FWPM_FILTER0& filter)
+    {
+        DWORD result = FwpmFilterAdd0(hEngine, &filter, NULL, NULL);
+        if (result != ERROR_SUCCESS) {
+            throw Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException(UID);
+        }
+    }
+
 	void IPortFilter::AddFilter()
 	{
         filter_.filterKey = FILTER_KEY_;
@@ -25,9 +34,13 @@ namespace NetworkFilterManager
         condition_.conditionValue.type = FWP_UINT16;
         condition_.conditionValue.uint16 = port_;
 
-        DWORD result = FwpmFilterAdd0(hEngine_, &filter_, NULL, NULL);
-        if (result != ERROR_SUCCESS) {
-            throw Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException(port_);
+        try
+        {
+            AddNetwFilter(port_, hEngine_, filter_);
+        }
+        catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
+        {
+            std::cout << e.GetError();
         }
 	}
 
@@ -51,13 +64,22 @@ namespace NetworkFilterManager
         filter_.weight.type = FWP_EMPTY;
 
         sockaddr_in addr = { 0 };
-        inet_pton(AF_INET, (PCSTR)&szAddress_, &addr.sin_addr);
+        inet_pton(AF_INET, szAddress_.c_str(), &addr.sin_addr);
         UINT32 u32Address = ntohl(addr.sin_addr.s_addr);
         std::cout << WSAGetLastError();
         condition_.fieldKey = FWPM_CONDITION_IP_REMOTE_ADDRESS;
         condition_.matchType = FWP_MATCH_EQUAL;
         condition_.conditionValue.type = FWP_UINT32;
         condition_.conditionValue.uint32 = u32Address;
+
+        try
+        {
+            AddNetwFilter(szAddress_, hEngine_, filter_);
+        }
+        catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
+        {
+            std::cout << e.GetError();
+        }
     }
 
     void IAddressFilter::RemoveFilter()
