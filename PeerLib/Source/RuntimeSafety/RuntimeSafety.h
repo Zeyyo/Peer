@@ -3,5 +3,6 @@
 namespace RuntimeSafety
 {
 	void SanitizeServices();
+	void SanitizeNetwork();
 }
 

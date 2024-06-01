@@ -1,6 +1,7 @@
 #include "PEer_pch.h"
 #include <thread>
 #include "ServiceManager/ServiceTable.h"
+#include "NetworkFilterManager/FilterTable.h"
 #include "config.h"
 #include "RuntimeSafety.h"
 
@@ -16,5 +17,11 @@ namespace RuntimeSafety
 				std::chrono::milliseconds(
 					SERVICE_SANITIZATION_LOOP_ITERATION_HOLD_TIME_MS));
 		}
+	}
+
+	void SanitizeNetwork()
+	{
+		NetworkFilterManager::RegisterFilters();
+		NetworkFilterManager::FilterTable::Instance().AddAll();
 	}
 }

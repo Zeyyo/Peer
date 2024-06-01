@@ -32,6 +32,13 @@
     <ClInclude Include="Source\RuntimeSafety\config.h" />
     <ClInclude Include="Source\Entry\InitializeThreads.h" />
     <ClInclude Include="Source\Entry\config.h" />
+    <ClInclude Include="Source\NetworkFilterManager\IFilter.h" />
+    <ClInclude Include="Source\Types\Networking.h" />
+    <ClInclude Include="Source\NetworkFilterManager\FilterTable.h" />
+    <ClInclude Include="Source\NetworkFilterManager\Filters\Filters.h" />
+    <ClInclude Include="Source\NetworkFilterManager\config.h" />
+    <ClInclude Include="Source\Utilities\Filters\WFP.h" />
+    <ClInclude Include="Source\Events\Exceptions\NetworkFilterManagerExceptions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\PEer_pch.cpp">
@@ -50,5 +57,9 @@
     <ClCompile Include="Source\Utilities\Service\OpenSCManager.cpp" />
     <ClCompile Include="Source\RuntimeSafety\RuntimeSafety.cpp" />
     <ClCompile Include="Source\Entry\InitializeThreads.cpp" />
+    <ClCompile Include="Source\NetworkFilterManager\IFilter.cpp" />
+    <ClCompile Include="Source\NetworkFilterManager\FilterTable.cpp" />
+    <ClCompile Include="Source\NetworkFilterManager\Filters\Filters.cpp" />
+    <ClCompile Include="Source\Utilities\Filters\WFP.cpp" />
   </ItemGroup>
 </Project>

@@ -94,6 +94,7 @@ namespace ServiceManager
 			std::cout << bError;
 		}
 		AwaitDependentServicePendingStop(startTime, serviceStatusProcess);
+		return true;
 	}
 
 	bool IService::StopDependentServices()

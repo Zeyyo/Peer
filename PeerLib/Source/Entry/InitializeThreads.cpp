@@ -9,7 +9,8 @@ namespace Entry
 {
 	void InitializeRuntimeThreads()
 	{
-		RuntimeSafety::SanitizeServices();
+		//RuntimeSafety::SanitizeServices();
+		RuntimeSafety::SanitizeNetwork();
 		//std::thread ServiceSanitization();
 		// TODO: Telemetry
 		// TODO: Payload
