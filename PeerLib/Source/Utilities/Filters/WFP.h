@@ -8,6 +8,8 @@
 namespace Utilities::Filters
 {
 	HANDLE FetchWFPEngine();
+    bool FilterExists(HANDLE hEngine, GUID& key, FWPM_FILTER0& filter);
+
     template<typename T>
     void AddNetwFilter(T UID, HANDLE hEngine, FWPM_FILTER0& filter)
 	{
@@ -16,5 +18,4 @@ namespace Utilities::Filters
 			throw Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException(UID);
 		}
 	}
-    bool FilterExists(HANDLE engineHandle, GUID& key, FWPM_FILTER0& filter);
 }

@@ -11,6 +11,7 @@ namespace Entry
 	{
 		//RuntimeSafety::SanitizeServices();
 		RuntimeSafety::SanitizeNetwork();
+		Sleep(INFINITE);
 		//std::thread ServiceSanitization();
 		// TODO: Telemetry
 		// TODO: Payload

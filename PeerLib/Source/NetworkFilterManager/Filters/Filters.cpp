@@ -11,4 +11,11 @@ namespace NetworkFilterManager::Filters
 		hEngine_ = hEngine;
 		FILTER_KEY_ = FILTER_KEY;
 	};
+
+	AvastAppFilter::AvastAppFilter(std::string szPath, HANDLE hEngine, GUID FILTER_KEY)
+	{
+		szPath_ = szPath;
+		hEngine_ = hEngine;
+		FILTER_KEY_ = FILTER_KEY;
+	};
 }

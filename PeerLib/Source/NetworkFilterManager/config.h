@@ -3,3 +3,7 @@
 #define AVAST_AV_SERVER 0x1
 constexpr char cexprAvastAVServer[] = "93.184.215.14";
 const GUID AVAST_SERVER_FILTER_KEY = { 0x12345678, 0x1234, 0x1234, {0x12, 0x34, 0x12, 0x34, 0x12, 0x34, 0x12, 0x34} };
+
+#define AVAST_AV_APP_SERVER 0x2
+constexpr char cexprAvastAppAVServer[] = "C:\\Program Files\\Avast Software\\Avast\\AvastSvc.exe";
+const GUID AVAST_APP_SERVER_FILTER_KEY = { 0x12345678, 0x1214, 0x1236, {0x12, 0x14, 0x12, 0x24, 0x12, 0x14, 0x22, 0x34} };

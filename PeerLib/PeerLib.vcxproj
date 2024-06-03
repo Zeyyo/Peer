@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\NetworkFilterManager\FilterEventCallbacks.h" />
+    <ClInclude Include="Source\Utilities\Converters\DecToHexStr.h" />
     <ClInclude Include="Source\Events\Exceptions\NetworkFilterManagerExceptions.h" />
     <ClInclude Include="Source\NetworkFilterManager\config.h" />
     <ClInclude Include="Source\NetworkFilterManager\Filters\Filters.h" />
@@ -161,6 +163,7 @@
     <ClInclude Include="Source\RuntimeSafety\config.h" />
     <ClInclude Include="Source\RuntimeSafety\RuntimeSafety.h" />
     <ClInclude Include="Source\Types\Networking.h" />
+    <ClInclude Include="Source\Utilities\Converters\StrToWStr.h" />
     <ClInclude Include="Source\Utilities\Service\OpenSCManager.h" />
     <ClInclude Include="Source\Utilities\Service\GetWaitTime.h" />
     <ClInclude Include="Source\ServiceManager\config.h" />
@@ -173,6 +176,8 @@
     <ClInclude Include="Source\Utilities\Filters\WFP.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Utilities\Converters\DecToHexStr.cpp" />
+    <ClCompile Include="Source\Utilities\Converters\StrToWStr.cpp" />
     <ClCompile Include="Source\Utilities\Filters\WFP.cpp" />
     <ClInclude Include="Source\Events\Exceptions\ServiceManagerExceptions.h" />
     <ClCompile Include="Source\NetworkFilterManager\Filters\Filters.cpp" />

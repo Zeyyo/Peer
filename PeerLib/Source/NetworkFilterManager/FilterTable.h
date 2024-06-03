@@ -20,10 +20,18 @@ namespace NetworkFilterManager
             creators_[pattern] = std::move(creator);
         }
 
-        std::unique_ptr<IFilter> FilterLookup(const int pattern) const {
+        std::unique_ptr<IFilter> FilterCreatorLookup(const int pattern) const {
             auto it = creators_.find(pattern);
             if (it != creators_.end()) {
                 return it->second();
+            }
+            return nullptr;
+        }
+
+        std::unique_ptr<IFilter> FilterLookup(const int pattern) {
+            auto it = filters_.find(pattern);
+            if (it != filters_.end()) {
+                return std::move(it->second);
             }
             return nullptr;
         }
@@ -32,8 +40,12 @@ namespace NetworkFilterManager
         {
             for (auto itFilter = creators_.begin(); itFilter != creators_.end(); itFilter++)
             {
-                itFilter->second()->AddFilter();
+                std::unique_ptr<IFilter> iFilter = itFilter->second();
+                iFilter->AddFilter();
+                iFilter->KeepAlive();
+                filters_[itFilter->first] = std::move(iFilter);
             }
+            std::cout << "sdf";
         }
 
         void RemoveAll()
@@ -47,5 +59,6 @@ namespace NetworkFilterManager
     private:
         FilterTable() = default;
         std::unordered_map<INT8, FilterCreator> creators_;
+        std::unordered_map<INT8, std::unique_ptr<IFilter>> filters_;
     };
 }

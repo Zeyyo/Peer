@@ -44,11 +44,29 @@ namespace Exceptions::NetworkFilterManagerExceptions
         std::string szErrorMessage;
     public:
         WFPNetworkFilterRemoveException(const std::string& address) :
-            szErrorMessage("Could not remove WFP filter for" + address) {}
+            szErrorMessage("Could not remove WFP filter for " + address) {}
 
         WFPNetworkFilterRemoveException(const unsigned short& port) :
             szErrorMessage("Could not remove WFP filter for port " + std::to_string(port)) {}
 
+        const char* what() const noexcept override {
+            return szErrorMessage.c_str();
+        }
+        std::string GetError() const
+        {
+            return szErrorMessage;
+        }
+    };
+
+    class WFPNetworkFilterSubscriptionException : public std::exception {
+    private:
+        std::string szErrorMessage;
+    public:
+        WFPNetworkFilterSubscriptionException(const std::string& address) :
+            szErrorMessage("Could not subscribe to WFP filter events for " + address) {}
+
+        WFPNetworkFilterSubscriptionException(const unsigned short& port) :
+            szErrorMessage("Could not subscribe to WFP filter events for port " + std::to_string(port)) {}
 
         const char* what() const noexcept override {
             return szErrorMessage.c_str();
