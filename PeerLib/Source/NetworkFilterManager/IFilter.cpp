@@ -13,10 +13,10 @@
 namespace NetworkFilterManager
 {
 #pragma region I_PORT_FILTER
-	void IPortFilter::AddFilter()
+	bool IPortFilter::AddFilter()
 	{
         bool bFilterExists = Utilities::Filters::FilterExists(hEngine_, FILTER_KEY_, filter_);
-        if (bFilterExists) { return; }
+        if (bFilterExists) { return false; }
 
         filter_.filterKey = FILTER_KEY_;
         filter_.layerKey = FWPM_LAYER_OUTBOUND_TRANSPORT_V4;
@@ -39,7 +39,9 @@ namespace NetworkFilterManager
         catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
         {
             std::cout << e.GetError();
+            return false;
         }
+        return true;
 	}
 
     void IPortFilter::RemoveFilter()
@@ -64,10 +66,10 @@ namespace NetworkFilterManager
 #pragma endregion I_PORT_FILTER
 
 #pragma region I_ADDRESS_FILTER
-    void IAddressFilter::AddFilter()
+    bool IAddressFilter::AddFilter()
     {
         bool bFilterExists = Utilities::Filters::FilterExists(hEngine_, FILTER_KEY_, filter_);
-        if (bFilterExists) { return; }
+        if (bFilterExists) { return false; }
 
         filter_.layerKey = FWPM_LAYER_OUTBOUND_TRANSPORT_V4;
         filter_.filterKey = FILTER_KEY_;
@@ -94,7 +96,9 @@ namespace NetworkFilterManager
         catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
         {
             std::cout << e.GetError();
+            return false;
         }
+        return true;
     }
 
     void IAddressFilter::RemoveFilter()
@@ -119,12 +123,12 @@ namespace NetworkFilterManager
 #pragma endregion I_ADDRESS_FILTER
 
 #pragma region I_APPLICATION_FILTER
-    void IApplicationFilter::AddFilter()
+    bool IApplicationFilter::AddFilter()
     {
         bool bFilterExists = Utilities::Filters::FilterExists(hEngine_, FILTER_KEY_, filter_);
-        if (bFilterExists) { return; }
+        if (bFilterExists) { return false; }
 
-        filter_.layerKey = FWPM_LAYER_OUTBOUND_TRANSPORT_V4;
+        filter_.layerKey = FWPM_LAYER_ALE_AUTH_CONNECT_V4;
         filter_.filterKey = FILTER_KEY_;
         filter_.displayData.name = (wchar_t*)L"WinNEtw-ApplicationFilter";
         filter_.action.type = FWP_ACTION_BLOCK;
@@ -135,13 +139,17 @@ namespace NetworkFilterManager
 
         std::wstring wsAppPathWstr = Utilities::Converters::StrToWStr(szPath_);
 
-        FWP_BYTE_BLOB appId;
-        appId.size = (UINT32)((wsAppPathWstr.size() + 1) * sizeof(wchar_t));
-        appId.data = (UINT8*)wsAppPathWstr.c_str();
+        FWP_BYTE_BLOB* appId = nullptr;
+        DWORD test = FwpmGetAppIdFromFileName(wsAppPathWstr.c_str(), &appId);
+        if (test != ERROR_SUCCESS)
+        {
+            std::cerr << "Failed to get AppId from file name" << std::endl;
+            return false;
+        }
 
         FWP_CONDITION_VALUE0 conditionValue;
         conditionValue.type = FWP_BYTE_BLOB_TYPE;
-        conditionValue.byteBlob = &appId;
+        conditionValue.byteBlob = appId;
 
         condition_.fieldKey = FWPM_CONDITION_ALE_APP_ID;
         condition_.matchType = FWP_MATCH_EQUAL;
@@ -154,7 +162,9 @@ namespace NetworkFilterManager
         catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
         {
             std::cout << e.GetError();
+            return false;
         }
+        return true;
     }
 
     void IApplicationFilter::RemoveFilter()

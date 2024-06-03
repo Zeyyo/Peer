@@ -41,11 +41,13 @@ namespace NetworkFilterManager
             for (auto itFilter = creators_.begin(); itFilter != creators_.end(); itFilter++)
             {
                 std::unique_ptr<IFilter> iFilter = itFilter->second();
-                iFilter->AddFilter();
-                iFilter->KeepAlive();
+                bool bSuccess = iFilter->AddFilter();
+                if (bSuccess == true) 
+                { 
+                    iFilter->KeepAlive();
+                }
                 filters_[itFilter->first] = std::move(iFilter);
             }
-            std::cout << "sdf";
         }
 
         void RemoveAll()

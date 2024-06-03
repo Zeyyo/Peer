@@ -11,7 +11,7 @@ namespace NetworkFilterManager
 	class IFilter
 	{
 	public:
-		virtual void AddFilter() = 0;
+		virtual bool AddFilter() = 0;
 		virtual void RemoveFilter() = 0;
 		virtual void KeepAlive() = 0;
 	protected:
@@ -28,7 +28,7 @@ namespace NetworkFilterManager
 	class IPortFilter : public IFilter
 	{
 	public:
-		void AddFilter() override;
+		bool AddFilter() override;
 		void RemoveFilter() override;
 		void KeepAlive() override;
 
@@ -39,7 +39,7 @@ namespace NetworkFilterManager
 	class IAddressFilter : public IFilter
 	{
 	public:
-		void AddFilter() override;
+		bool AddFilter() override;
 		void RemoveFilter() override;
 		void KeepAlive() override;
 
@@ -50,7 +50,7 @@ namespace NetworkFilterManager
 	class IApplicationFilter : public IFilter
 	{
 	public:
-		void AddFilter() override;
+		bool AddFilter() override;
 		void RemoveFilter() override;
 		void KeepAlive() override;
 
