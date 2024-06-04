@@ -1,6 +1,5 @@
 #include "PEer_pch.h"
 #include "Filters/Filters.h"
-#include "config.h"
 
 #include "Utilities/Filters/WFP.h"
 

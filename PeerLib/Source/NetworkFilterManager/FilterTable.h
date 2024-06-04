@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 #include "IFilter.h"
+#include "config.h"
 
 namespace NetworkFilterManager
 {
@@ -41,11 +42,9 @@ namespace NetworkFilterManager
             for (auto itFilter = creators_.begin(); itFilter != creators_.end(); itFilter++)
             {
                 std::unique_ptr<IFilter> iFilter = itFilter->second();
-                bool bSuccess = iFilter->AddFilter();
-                if (bSuccess == true) 
-                { 
-                    iFilter->KeepAlive();
-                }
+                WORD bSuccess = iFilter->AddFilter();
+                if (bSuccess == FILTER_ERROR) { continue; }
+                iFilter->KeepAlive();
                 filters_[itFilter->first] = std::move(iFilter);
             }
         }

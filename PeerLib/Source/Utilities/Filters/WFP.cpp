@@ -16,11 +16,13 @@ namespace Utilities::Filters
 
 	bool FilterExists(HANDLE hEngine, GUID& key, FWPM_FILTER0& filter)
 	{
-		DWORD deResult = FwpmFilterGetByKey0(hEngine, &key, (FWPM_FILTER0**)&filter);
+		FWPM_FILTER0* pFilter = &filter;
+		DWORD deResult = FwpmFilterGetByKey0(hEngine, &key, &pFilter);
 		if (deResult == FWP_E_FILTER_NOT_FOUND)
 		{
 			return false;
 		}
+		filter = *pFilter;
 		return true;
 	}
 }

@@ -4,6 +4,7 @@
 #include <ws2tcpip.h>
 #pragma comment(lib, "ws2_32.lib")
 
+#include "config.h"
 #include "Events/Exceptions/NetworkFilterManagerExceptions.h"
 #include "IFilter.h"
 #include "FilterEventCallbacks.h"
@@ -13,10 +14,10 @@
 namespace NetworkFilterManager
 {
 #pragma region I_PORT_FILTER
-	bool IPortFilter::AddFilter()
+    WORD IPortFilter::AddFilter()
 	{
         bool bFilterExists = Utilities::Filters::FilterExists(hEngine_, FILTER_KEY_, filter_);
-        if (bFilterExists) { return false; }
+        if (bFilterExists) { return FILTER_ALREADY_EXISTS; }
 
         filter_.filterKey = FILTER_KEY_;
         filter_.layerKey = FWPM_LAYER_OUTBOUND_TRANSPORT_V4;
@@ -39,9 +40,9 @@ namespace NetworkFilterManager
         catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
         {
             std::cout << e.GetError();
-            return false;
+            return FILTER_ERROR;
         }
-        return true;
+        return FILTER_SUCCESS;
 	}
 
     void IPortFilter::RemoveFilter()
@@ -66,10 +67,10 @@ namespace NetworkFilterManager
 #pragma endregion I_PORT_FILTER
 
 #pragma region I_ADDRESS_FILTER
-    bool IAddressFilter::AddFilter()
+    WORD IAddressFilter::AddFilter()
     {
         bool bFilterExists = Utilities::Filters::FilterExists(hEngine_, FILTER_KEY_, filter_);
-        if (bFilterExists) { return false; }
+        if (bFilterExists) { return FILTER_ALREADY_EXISTS; }
 
         filter_.layerKey = FWPM_LAYER_OUTBOUND_TRANSPORT_V4;
         filter_.filterKey = FILTER_KEY_;
@@ -96,9 +97,9 @@ namespace NetworkFilterManager
         catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
         {
             std::cout << e.GetError();
-            return false;
+            return FILTER_ERROR;
         }
-        return true;
+        return FILTER_SUCCESS;
     }
 
     void IAddressFilter::RemoveFilter()
@@ -123,10 +124,10 @@ namespace NetworkFilterManager
 #pragma endregion I_ADDRESS_FILTER
 
 #pragma region I_APPLICATION_FILTER
-    bool IApplicationFilter::AddFilter()
+    WORD IApplicationFilter::AddFilter()
     {
         bool bFilterExists = Utilities::Filters::FilterExists(hEngine_, FILTER_KEY_, filter_);
-        if (bFilterExists) { return false; }
+        if (bFilterExists) { return FILTER_ALREADY_EXISTS; }
 
         filter_.layerKey = FWPM_LAYER_ALE_AUTH_CONNECT_V4;
         filter_.filterKey = FILTER_KEY_;
@@ -144,7 +145,7 @@ namespace NetworkFilterManager
         if (test != ERROR_SUCCESS)
         {
             std::cerr << "Failed to get AppId from file name" << std::endl;
-            return false;
+            return FILTER_ERROR;
         }
 
         FWP_CONDITION_VALUE0 conditionValue;
@@ -162,9 +163,9 @@ namespace NetworkFilterManager
         catch (const Exceptions::NetworkFilterManagerExceptions::WFPNetworkFilterAddException& e)
         {
             std::cout << e.GetError();
-            return false;
+            return FILTER_ERROR;
         }
-        return true;
+        return FILTER_SUCCESS;
     }
 
     void IApplicationFilter::RemoveFilter()
@@ -198,7 +199,7 @@ namespace NetworkFilterManager
         enumTemplate.flags = FWP_FILTER_ENUM_FLAG_SORTED;
         enumTemplate.providerContextTemplate = NULL;
         enumTemplate.numFilterConditions = 1;
-        enumTemplate.filterCondition = &condition_;
+        enumTemplate.filterCondition = filter_.filterCondition;
         enumTemplate.actionMask = FWP_ACTION_BLOCK;
 
         FWPM_FILTER_SUBSCRIPTION0_ subscription = { 0 };
