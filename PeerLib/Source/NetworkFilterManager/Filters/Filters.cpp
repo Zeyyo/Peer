@@ -1,6 +1,4 @@
 #include "PEer_pch.h"
-
-
 #include "Filters.h"
 
 namespace NetworkFilterManager::Filters

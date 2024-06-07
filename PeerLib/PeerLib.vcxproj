@@ -78,14 +78,17 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PEer_pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)/PeerLib/Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/PeerLib/Source; "D:\Library\cryptopp"</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <AdditionalLibraryDirectories>D:\Library\cryptopp\x64\Output\Release;D:\Library\cryptopp\x64\Output\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -98,8 +101,9 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PEer_pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)/PeerLib/Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/PeerLib/Source; "D:\Library\cryptopp"</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -108,6 +112,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <AdditionalLibraryDirectories>D:\Library\cryptopp\x64\Output\Release;D:\Library\cryptopp\x64\Output\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,14 +124,17 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PEer_pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)/PeerLib/Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/PeerLib/Source; "D:\Library\cryptopp"</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <AdditionalLibraryDirectories>D:\Library\cryptopp\x64\Output\Release;D:\Library\cryptopp\x64\Output\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,8 +147,9 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PEer_pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)/PeerLib/Source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/PeerLib/Source; "D:\Library\cryptopp"</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -148,9 +158,45 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <AdditionalLibraryDirectories>D:\Library\cryptopp\x64\Output\Release;D:\Library\cryptopp\x64\Output\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\ConnectionManager\SessionHandling\SessionOperator\config.h" />
+    <ClInclude Include="Source\Helpers\ConnectionHelper\ConnectionHelper.h" />
+    <ClInclude Include="Source\Remote\config.h" />
+    <ClInclude Include="Source\Remote\Connect.h" />
+    <ClInclude Include="Source\ConnectionManager\Core\Core.h" />
+    <ClInclude Include="Source\ConnectionManager\SessionHandling\SessionOperator\SessionOperator.h" />
+    <ClInclude Include="Source\ConnectionManager\SessionHandling\Session\Session.h" />
+    <ClInclude Include="Source\Crypto\config.h" />
+    <ClInclude Include="Source\Crypto\CryptoService.h" />
+    <ClInclude Include="Source\Events\Exceptions\ConnectionManagerExceptions.h" />
+    <ClInclude Include="Source\Events\Exceptions\CryptoOperationException.h" />
+    <ClInclude Include="Source\Events\Exceptions\NetworkOperationExceptions.h" />
+    <ClInclude Include="Source\Events\Exceptions\ServerCoreExceptions.h" />
+    <ClInclude Include="Source\Events\Exceptions\SocketOperationExceptions.h" />
+    <ClInclude Include="Source\Events\Exceptions\TaskManagerExceptions.h" />
+    <ClInclude Include="Source\Events\Logger\Logger.h" />
+    <ClInclude Include="Source\Events\Logger\OstreamLogger.h" />
+    <ClInclude Include="Source\Helpers\OperationHelper\OperationHelper.h" />
+    <ClInclude Include="Source\TaskManager\config.h" />
+    <ClInclude Include="Source\TaskManager\ITask.h" />
+    <ClInclude Include="Source\TaskManager\TaskManager.h" />
+    <ClInclude Include="Source\TaskManager\Tasks\Default\Default.h" />
+    <ClInclude Include="Source\TaskManager\Tasks\Telemetry\config.h" />
+    <ClInclude Include="Source\TaskManager\Tasks\Telemetry\Startup.h" />
+    <ClInclude Include="Source\TaskManager\Tasks\Telemetry\TaskCallback.h" />
+    <ClInclude Include="Source\TaskManager\TaskTable.h" />
+    <ClInclude Include="Source\Types\Filters.h" />
+    <ClInclude Include="Source\Types\Session.h" />
+    <ClInclude Include="Source\Types\Task.h" />
+    <ClInclude Include="Source\Types\Time.h" />
+    <ClInclude Include="Source\Utilities\Crypto\Base64EncDec.h" />
+    <ClInclude Include="Source\Utilities\Crypto\HexEncDec.h" />
+    <ClInclude Include="Source\Utilities\NameMangling\NameMangling.h" />
+    <ClInclude Include="Source\Utilities\SocketOperations\SocketOperations.h" />
     <ClInclude Include="Source\NetworkFilterManager\FilterEventCallbacks.h" />
     <ClInclude Include="Source\Utilities\Converters\DecToHexStr.h" />
     <ClInclude Include="Source\Events\Exceptions\NetworkFilterManagerExceptions.h" />
@@ -174,11 +220,33 @@
     <ClInclude Include="Source\Entry\Initialize.h" />
     <ClInclude Include="Source\PEer_pch.h" />
     <ClInclude Include="Source\Utilities\Filters\WFP.h" />
+    <ClInclude Include="Source\Utilities\ZeroBuffer\ZeroBuffer.h" />
+    <ClInclude Include="Source\Protocols\TELEMETRY\TELEMETRY.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Helpers\ConnectionHelper\ConnectionHelper.cpp" />
+    <ClCompile Include="Source\Remote\Connect.cpp" />
+    <ClCompile Include="Source\ConnectionManager\Core\Core.cpp" />
+    <ClCompile Include="Source\ConnectionManager\SessionHandling\SessionOperator\SessionOperator.cpp" />
+    <ClCompile Include="Source\ConnectionManager\SessionHandling\Session\Session.cpp" />
+    <ClCompile Include="Source\Crypto\CryptoService.cpp" />
+    <ClCompile Include="Source\Helpers\OperationHelper\OperationHelper.cpp" />
+    <ClCompile Include="Source\TaskManager\TaskManager.cpp" />
+    <ClCompile Include="Source\TaskManager\Tasks\Default\Default.cpp" />
+    <ClCompile Include="Source\Protocols\TELEMETRY\TELEMETRY.cpp" />
+    <ClInclude Include="Source\TaskManager\Tasks\Runtime\NetworkSanitization.h" />
+    <ClInclude Include="Source\TaskManager\Tasks\Runtime\ServiceSanitization.h" />
+    <ClCompile Include="Source\TaskManager\Tasks\Telemetry\Startup.cpp" />
+    <ClCompile Include="Source\TaskManager\Tasks\Telemetry\TaskCallback.cpp" />
+    <ClCompile Include="Source\TaskManager\TaskTable.cpp" />
+    <ClCompile Include="Source\Utilities\Crypto\Base64EncDec.cpp" />
+    <ClCompile Include="Source\Utilities\Crypto\HexEncDec.cpp" />
+    <ClCompile Include="Source\Utilities\NameMangling\NameMangling.cpp" />
+    <ClCompile Include="Source\Utilities\SocketOperations\SocketOperations.cpp" />
     <ClCompile Include="Source\Utilities\Converters\DecToHexStr.cpp" />
     <ClCompile Include="Source\Utilities\Converters\StrToWStr.cpp" />
     <ClCompile Include="Source\Utilities\Filters\WFP.cpp" />
+    <ClCompile Include="Source\Utilities\ZeroBuffer\ZeroBuffer.cpp" />
     <ClInclude Include="Source\Events\Exceptions\ServiceManagerExceptions.h" />
     <ClCompile Include="Source\NetworkFilterManager\Filters\Filters.cpp" />
     <ClCompile Include="Source\NetworkFilterManager\IFilter.cpp" />

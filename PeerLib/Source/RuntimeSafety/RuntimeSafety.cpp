@@ -23,5 +23,6 @@ namespace RuntimeSafety
 	{
 		NetworkFilterManager::RegisterFilters();
 		NetworkFilterManager::FilterTable::Instance().AddAll();
+
 	}
 }

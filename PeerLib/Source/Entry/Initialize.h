@@ -2,5 +2,5 @@
 
 namespace Entry
 {
-	void Initialize();
+	extern __declspec(dllexport) void Initialize();
 }

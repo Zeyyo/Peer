@@ -1,9 +1,5 @@
 #include "PEer_pch.h"
 
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#pragma comment(lib, "ws2_32.lib")
-
 #include "config.h"
 #include "Events/Exceptions/NetworkFilterManagerExceptions.h"
 #include "IFilter.h"
